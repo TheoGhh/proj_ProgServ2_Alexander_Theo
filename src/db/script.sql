@@ -76,6 +76,7 @@ CREATE TABLE IF NOT EXISTS reponses (
     FOREIGN KEY (id_critique) REFERENCES critiques (id) ON DELETE CASCADE
 );
 
+/*
 CREATE TABLE IF NOT EXISTS signalements (
     id INT AUTO_INCREMENT PRIMARY KEY,
     motif VARCHAR(500) NOT NULL,
@@ -88,3 +89,4 @@ CREATE TABLE IF NOT EXISTS signalements (
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs (id) ON DELETE CASCADE,
     FOREIGN KEY (id_critique) REFERENCES critiques (id) ON DELETE CASCADE
 );
+*/
