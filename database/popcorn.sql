@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
     mot_de_passe VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     date_creation DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    est_admin BOOLEAN NOT NULL DEFAULT FALSE
+    est_admin BOOLEAN NOT NULL DEFAULT FALSE,
+    photo_utilisateur VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS oeuvres (
