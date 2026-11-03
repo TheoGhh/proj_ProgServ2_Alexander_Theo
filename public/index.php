@@ -1,83 +1,26 @@
 <?php
 
 require_once __DIR__ . '/../src/autoloader.php';
+require_once __DIR__ . '/../src/functions.php';
 
 $database = new Database();
 $pdo = $database->getPdo();
 
-$sql = "SELECT 
-            roles.id as id_role,
-            acteurs.nom as acteur,
-            acteurs.photo,
-            oeuvres.titre,
-            roles.personnage,
-            ROUND(AVG(critiques.note), 1) AS score
-        FROM critiques
-        JOIN roles   ON critiques.id_role = roles.id
-        JOIN acteurs ON roles.id_acteur   = acteurs.id
-        JOIN oeuvres ON roles.id_oeuvre   = oeuvres.id
-        GROUP BY roles.id, acteurs.nom, acteurs.photo, oeuvres.titre, roles.personnage
-        ORDER BY score DESC
-        LIMIT 4";
+$performances = getTopPerformances($pdo);
+$lastReviews = getLatestReviews($pdo);
 
-$stmt = $pdo->prepare($sql);
-
-$stmt->execute();
-
-$performances = $stmt->fetchAll();
-
-
-$sql = "SELECT
-            critiques.id as id_critique,
-            utilisateurs.photo_utilisateur,
-            utilisateurs.nom_utilisateur as utilisateur,
-            critiques.date_creation,
-            acteurs.nom,
-            roles.personnage,
-            oeuvres.titre,
-            critiques.note,
-            critiques.commentaire
-        FROM critiques
-        JOIN utilisateurs ON critiques.id_utilisateur = utilisateurs.id
-        JOIN roles        ON critiques.id_role        = roles.id
-        JOIN acteurs      ON roles.id_acteur          = acteurs.id
-        JOIN oeuvres      ON roles.id_oeuvre          = oeuvres.id
-        ORDER BY critiques.date_creation DESC
-        LIMIT 6";
-
-$stmt = $pdo->prepare($sql);
-
-$stmt->execute();
-
-$lastReviews = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PopCorn : Acting Reviewer</title>
-</head>
+<?php render('head', [
+    'title' => "PopCorn : Acting Reviewer",
+    'description' => "PopCorn - Notez les performances des acteurs"
+]); ?>
 
 <body>
-    <header>
-        <h1>PopCorn</h1>
-        <nav>
-            <ul>
-                <li><a href="./actorsCatalog.php">Acteurs</a></li>
-                <li><a href="./filmsSeriesCatalog.php">Films & séries</a></li>
-            </ul>
-        </nav>
-
-        <div class="connectionSection">
-            <ul>
-                <li><a href="./login.php">Connexion</a></li>
-                <li><a href="./registration.php">S'inscrire</a></li>
-            </ul>
-        </div>
-    </header>
+    <?php render('header', []); ?>
 
     <main>
         <section id="introduction">
@@ -101,7 +44,7 @@ $lastReviews = $stmt->fetchAll();
                 </search>
             </div>
 
-            <img src="./../img/popcorn-graphic-clipart-design-free-png.webp" alt="popcorn">
+            <img src="./images/popcorn-graphic-clipart-design-free-png.webp" alt="popcorn">
         </section>
 
         <section id="highestRatedPerformances">

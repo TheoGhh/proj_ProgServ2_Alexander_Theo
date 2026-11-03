@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Cherry+Bomb+One&display=swap");
+
+:root {
+	/* Couleurs */
+	--color-background: #fff0d0;
+	--color-background-alt: #dccfb2;
+	--color-primary: #ffaa54;
+	--color-text: #5a5a5a;
+	--color-text-light: #ffffff;
+
+	/* Typographie */
+	--font-logo: "Cherry Bomb One", sans-serif;
+	--font-text: "Archivo", sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-text);
+	color: var(--color-text);
+	background-color: var(--color-background);
+}

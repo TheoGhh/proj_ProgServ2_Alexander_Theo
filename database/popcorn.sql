@@ -1,7 +1,3 @@
-CREATE DATABASE IF NOT EXISTS popcorn;
-
-USE popcorn;
-
 CREATE TABLE IF NOT EXISTS utilisateurs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom_utilisateur VARCHAR(50) NOT NULL UNIQUE,
