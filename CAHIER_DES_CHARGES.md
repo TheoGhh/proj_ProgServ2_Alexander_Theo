@@ -1054,3 +1054,5 @@ Les membres doivent pouvoir publier leurs évaluations, gérer leurs critiques e
 Les administrateurs doivent disposer des outils nécessaires pour gérer les données, contrôler les comptes et modérer les contenus.
 
 L'ensemble des fonctionnalités doit respecter les règles de validation, de calcul des moyennes, de classement, de conservation des données et de sécurité définies dans le présent cahier des charges.
+
+Ajout test si git fonctionne
