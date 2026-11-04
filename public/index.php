@@ -15,7 +15,7 @@ $lastReviews = getLatestReviews($pdo);
 <html lang="fr">
 
 <?php render('head', [
-    'title' => "PopCorn : Acting Reviewer",
+    'title' => "PopCorn | Acting Reviewer",
     'description' => "PopCorn - Notez les performances des acteurs"
 ]); ?>
 

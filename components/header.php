@@ -1,11 +1,13 @@
 <header>
-    <h1>PopCorn</h1>
-    <nav>
-        <ul>
-            <li><a href="./actorsCatalog.php">Acteurs</a></li>
-            <li><a href="./filmsSeriesCatalog.php">Films & séries</a></li>
-        </ul>
-    </nav>
+    <div id="navigationSection">
+        <h1>PopCorn</h1>
+        <nav>
+            <ul>
+                <li><a href="./actorsCatalog.php">Acteurs</a></li>
+                <li><a href="./filmsSeriesCatalog.php">Films & séries</a></li>
+            </ul>
+        </nav>
+    </div>
 
     <div class="connectionSection">
         <ul>
