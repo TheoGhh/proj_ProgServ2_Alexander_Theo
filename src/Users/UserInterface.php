@@ -1,5 +1,7 @@
 <?php
 
+namespace Users;
+
 interface UserInterface {
     public function getId(): ?int;
     public function getUsername(): string;
@@ -10,4 +12,5 @@ interface UserInterface {
     public function setUsername(string $username): void;
     public function setEmail(string $email): void;
     public function setPassword(string $password): void;
+    public function setPasswordHash(string $passwordHash): void;
 }

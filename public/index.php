@@ -3,6 +3,8 @@
 require_once __DIR__ . '/../src/autoloader.php';
 require_once __DIR__ . '/../src/functions.php';
 
+use Database\Database;
+
 $database = new Database();
 $pdo = $database->getPdo();
 

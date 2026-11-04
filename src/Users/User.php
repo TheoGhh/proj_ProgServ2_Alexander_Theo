@@ -1,21 +1,26 @@
 <?php
 
+namespace Users;
+
 class User implements UserInterface {
     const USERNAME_MIN_LENGTH = 3;
     const USERNAME_MAX_LENGTH = 30;
-    const EMAIL_MAX_LENGTH = 255;
+    const EMAIL_MAX_LENGTH = 120;
     const PASSWORD_MIN_LENGTH = 8;
 
     private ?int $id;
     private string $username;
     private string $email;
-    private string $passwordHash;
+    private string $passwordHash = '';
 
-    public function __construct(?int $id, string $username, string $email, string $password) {
+    public function __construct(?int $id, string $username, string $email, ?string $password = null) {
         $this->id = $id;
         $this->setUsername($username);
         $this->setEmail($email);
-        $this->setPassword($password);
+
+        if ($password !== null) {
+            $this->setPassword($password);
+        }
     }
 
     public function getId(): ?int {
@@ -43,7 +48,7 @@ class User implements UserInterface {
         $length = mb_strlen($username);
 
         if ($length < self::USERNAME_MIN_LENGTH || $length > self::USERNAME_MAX_LENGTH) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 "Le nom d'utilisateur doit contenir entre " . self::USERNAME_MIN_LENGTH
                     . " et " . self::USERNAME_MAX_LENGTH . " caractères."
             );
@@ -56,7 +61,7 @@ class User implements UserInterface {
         $email = trim($email);
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > self::EMAIL_MAX_LENGTH) {
-            throw new InvalidArgumentException("L'adresse e-mail n'est pas valide.");
+            throw new \InvalidArgumentException("L'adresse e-mail n'est pas valide.");
         }
 
         $this->email = $email;
@@ -64,11 +69,15 @@ class User implements UserInterface {
 
     public function setPassword(string $password): void {
         if (mb_strlen($password) < self::PASSWORD_MIN_LENGTH) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 "Le mot de passe doit contenir au moins " . self::PASSWORD_MIN_LENGTH . " caractères."
             );
         }
 
         $this->passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    public function setPasswordHash(string $passwordHash): void {
+        $this->passwordHash = $passwordHash;
     }
 }

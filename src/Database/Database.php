@@ -1,7 +1,9 @@
 <?php
 
+namespace Database;
+
 class Database implements DatabaseInterface {
-    const DATABASE_CONFIGURATION_FILE = __DIR__ . '/../config/database.ini';
+    const DATABASE_CONFIGURATION_FILE = __DIR__ . '/../../config/database.ini';
 
     private $pdo;
 
@@ -9,7 +11,7 @@ class Database implements DatabaseInterface {
         $config = parse_ini_file(self::DATABASE_CONFIGURATION_FILE, true);
 
         if (!$config) {
-            throw new Exception("Erreur lors de la lecture du fichier de configuration : " . self::DATABASE_CONFIGURATION_FILE);
+            throw new \Exception("Erreur lors de la lecture du fichier de configuration : " . self::DATABASE_CONFIGURATION_FILE);
         }
 
         $host = $config['host'];
@@ -18,7 +20,7 @@ class Database implements DatabaseInterface {
         $username = $config['username'];
         $password = $config['password'];
 
-        $this->pdo = new PDO("mysql:host=$host;port=$port;charset=utf8mb4", $username, $password);
+        $this->pdo = new \PDO("mysql:host=$host;port=$port;charset=utf8mb4", $username, $password);
 
         // Création de la base de données si elle n'existe pas
         $sql = "CREATE DATABASE IF NOT EXISTS `$database` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;";
@@ -31,7 +33,7 @@ class Database implements DatabaseInterface {
         $stmt->execute();
     }
 
-    public function getPdo(): PDO {
+    public function getPdo(): \PDO {
         return $this->pdo;
     }
 }
