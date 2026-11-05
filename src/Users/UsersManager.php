@@ -82,7 +82,7 @@ class UsersManager implements UsersManagerInterface {
 
         $userId = (int) $this->database->getPdo()->lastInsertId();
         $user->setId($userId);
-
+        echo "debug";
         return $userId;
     }
 
