@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         $usersManager->addUser($user);
 
-        //header('Location: ./../index.php');
+        header('Location: ./../index.php');
         exit;
     }
 }
