@@ -23,3 +23,166 @@ body {
 	color: var(--color-text);
 	background-color: var(--color-background);
 }
+
+/************************************************
+EN-TÊTE (commun à toutes les pages)
+************************************************/
+
+body > header {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: start;
+	padding: 2rem 2.5rem 1rem;
+}
+
+#navigationSection {
+	grid-column: 2;
+	text-align: center;
+}
+
+#navigationSection .logo {
+	margin: 0;
+	padding: 0 1rem 0.25rem;
+	border-bottom: 2px solid var(--color-primary);
+	font-family: var(--font-logo);
+	font-size: 3.5rem;
+	font-weight: 400;
+	color: var(--color-primary);
+}
+
+#navigationSection ul,
+.connectionSection ul {
+	display: flex;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#navigationSection ul {
+	justify-content: center;
+	gap: 2.5rem;
+	margin-top: 1.25rem;
+}
+
+#navigationSection a {
+	font-size: 1.6rem;
+	font-weight: 800;
+	color: var(--color-primary);
+	text-decoration: none;
+}
+
+.connectionSection {
+	grid-column: 3;
+	justify-self: end;
+}
+
+.connectionSection ul {
+	align-items: center;
+	gap: 1.5rem;
+}
+
+.connectionSection a {
+	font-size: 1.5rem;
+	color: var(--color-primary);
+	text-decoration: none;
+}
+
+.connectionSection li:last-child a {
+	padding: 0.3em 0.8em;
+	border-radius: 999px;
+	font-weight: 800;
+	color: var(--color-text-light);
+	background-color: var(--color-primary);
+}
+
+/************************************************
+PAGE INSCRIPTION
+************************************************/
+
+.formCard {
+	width: min(900px, 100% - 32px);
+	margin: 6rem auto 3rem;
+	padding: 2rem 4.5rem 3.5rem;
+	border-radius: 32px;
+	color: var(--color-text-light);
+	background-color: var(--color-primary);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.formCard h1 {
+	margin: 0 0 3rem;
+	font-size: 2.2rem;
+	font-weight: 800;
+	text-align: center;
+}
+
+.formCard form {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 1.5rem 1.75rem;
+}
+
+.formCard label {
+	font-size: 1.5rem;
+	font-weight: 800;
+}
+
+.formCard input {
+	width: 100%;
+	padding: 0.7rem 1.2rem;
+	border: none;
+	border-radius: 999px;
+	font: inherit;
+	font-size: 1.1rem;
+	color: var(--color-text);
+	background-color: #ffffff;
+	box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.15);
+}
+
+.formCard input:focus {
+	outline: 3px solid var(--color-text);
+	outline-offset: 2px;
+}
+
+.formCard button {
+	grid-column: 2;
+	justify-self: end;
+	margin-top: 2.5rem;
+	padding: 0.4rem 3rem;
+	border: none;
+	border-radius: 999px;
+	font: inherit;
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: var(--color-primary);
+	background-color: #ffffff;
+	cursor: pointer;
+}
+
+.formCard button:hover {
+	background-color: var(--color-background);
+}
+
+.formErrors {
+	margin: 0 0 2rem;
+	padding: 1rem 1.5rem;
+	border-radius: 16px;
+	color: #b3261e;
+	background-color: #ffffff;
+}
+
+.formErrors p {
+	margin: 0 0 0.5rem;
+	font-weight: 800;
+}
+
+.formErrors ul {
+	margin: 0;
+	padding-left: 1.25rem;
+}
+
+.formSuccess {
+	font-size: 1.3rem;
+	text-align: center;
+}

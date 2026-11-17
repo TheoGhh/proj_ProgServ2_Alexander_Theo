@@ -32,10 +32,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($errors)) {
-        $usersManager->addUser($user);
+        try {
+            $usersManager->addUser($user);
 
-        header('Location: ./../index.php');
-        exit;
+            header('Location: ./registration.php?success=1');
+            exit;
+        } catch (PDOException $e) {
+            $errors['form'] = "Une erreur est survenue lors de la création du compte utilisateur.";
+        }
     }
 }
 ?>
@@ -44,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="fr">
 
 <?php render('head', [
-    'title' => "Sign in | PopCorn",
+    'title' => "Inscription | PopCorn",
     'description' => "PopCorn - Crée un compte et partage toi aussi ton avis !"
 ]); ?>
 
@@ -52,18 +56,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php render('header', []); ?>
 
     <main>
-        <form action="./registration.php" method="POST">
-            <label for="username">Nom d'utilisateur</label>
-            <input type="text" id="username" name="username" value="<?= htmlspecialchars($username ?? ''); ?>" required minlength="<?= User::USERNAME_MIN_LENGTH ?>" maxlength="<?= User::USERNAME_MAX_LENGTH ?>">
+        <section class="formCard">
+            <h1>Création de compte</h1>
 
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" value="<?= htmlspecialchars($email ?? ''); ?>" required maxlength="<?= User::EMAIL_MAX_LENGTH ?>">
+            <?php if (!empty($errors)) { ?>
+                <div class="formErrors">
+                    <p>Le formulaire contient des erreurs :</p>
+                    <ul>
+                        <?php foreach ($errors as $error) { ?>
+                            <li><?= htmlspecialchars($error) ?></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            <?php } ?>
 
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" required minlength="<?= User::PASSWORD_MIN_LENGTH ?>">
+            <?php if (isset($_GET['success'])) { ?>
+                <p class="formSuccess">Ton compte a bien été créé !</p>
+            <?php } else { ?>
+                <form action="./registration.php" method="POST">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" value="<?= htmlspecialchars($username ?? ''); ?>" required minlength="<?= User::USERNAME_MIN_LENGTH ?>" maxlength="<?= User::USERNAME_MAX_LENGTH ?>">
 
-            <button type="submit">Créer</button>
-        </form>
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($email ?? ''); ?>" required maxlength="<?= User::EMAIL_MAX_LENGTH ?>">
+
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required minlength="<?= User::PASSWORD_MIN_LENGTH ?>">
+
+                    <button type="submit">Créer</button>
+                </form>
+            <?php } ?>
+        </section>
     </main>
 </body>
 
