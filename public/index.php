@@ -46,7 +46,7 @@ $lastReviews = getLatestReviews($pdo);
                 </search>
             </div>
 
-            <img src="./images/popcorn-graphic-clipart-design-free-png.webp" alt="popcorn">
+            <img src="public/images/popcorn-graphic-clipart-design-free-png.webp" alt="popcorn">
         </section>
 
         <section id="highestRatedPerformances">
@@ -54,7 +54,7 @@ $lastReviews = getLatestReviews($pdo);
 
             <?php foreach ($performances as $performance): ?>
                 <article class="performanceCard">
-                    <a href="./performance.php?id=<?= $performance['id_role'] ?>">
+                    <a href="public/performance.php?id=<?= $performance['id_role'] ?>">
                         <img
                             src="<?= htmlspecialchars($performance['photo']) ?>"
                             alt="Photo de <?= htmlspecialchars($performance['acteur']) ?>">
