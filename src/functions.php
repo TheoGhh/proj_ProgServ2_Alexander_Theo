@@ -41,12 +41,14 @@ function getTopPerformances(PDO $pdo): array {
 function getLatestReviews(PDO $pdo): array {
     $sql = "SELECT
             critiques.id as id_critique,
+            roles.id as id_role,
             utilisateurs.photo_utilisateur,
             utilisateurs.nom_utilisateur as utilisateur,
             critiques.date_creation,
             acteurs.nom,
             roles.personnage,
             oeuvres.titre,
+            oeuvres.date_sortie,
             critiques.note,
             critiques.commentaire
         FROM critiques

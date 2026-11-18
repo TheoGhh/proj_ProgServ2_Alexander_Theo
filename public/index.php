@@ -28,12 +28,12 @@ $lastReviews = getLatestReviews($pdo);
         <section id="introduction">
             <div class="left">
                 <p id="hook">Critique de performance d'acteurs</p>
-                <h2>
+                <h1>
                     On ne note pas les films.<br>
                     On note ceux qui les jouent.
-                </h2>
+                </h1>
                 <p>
-                    Brad Pitt était-il meilleur dans Fight Club ou dans Troie ?
+                    Brad Pitt était-il meilleur dans Fight Club ou dans Troie ?<br>
                     Distribue tes pop-corns à chaque rôle et compare les
                     performances d'un acteur d'un film ou d'une série à l'autre.
                 </p>
@@ -54,9 +54,9 @@ $lastReviews = getLatestReviews($pdo);
 
             <?php foreach ($performances as $performance): ?>
                 <article class="performanceCard">
-                    <a href="/public/performance.php?id=<?= $performance['id_role'] ?>">
+                    <a href="/public/performance.php?id=<?= (int) $performance['id_role'] ?>">
                         <img
-                            src="<?= htmlspecialchars($performance['photo']) ?>"
+                            src="<?= htmlspecialchars($performance['photo'] ?? '') ?>"
                             alt="Photo de <?= htmlspecialchars($performance['acteur']) ?>">
 
                         <h3><?= htmlspecialchars($performance['acteur']) ?></h3>
@@ -89,9 +89,32 @@ $lastReviews = getLatestReviews($pdo);
 
                         <div>
                             <p class="reviewAuthor"><?= htmlspecialchars($review['utilisateur']) ?></p>
-                            <time datetime=""></time>
+                            <time datetime="<?= htmlspecialchars($review['date_creation']) ?>">
+                                <?= htmlspecialchars(date('d.m.Y', strtotime($review['date_creation']))) ?>
+                            </time>
                         </div>
                     </header>
+
+                    <p class="reviewRole">
+                        <strong><?= htmlspecialchars($review['nom']) ?></strong>
+                        dans le rôle de <?= htmlspecialchars($review['personnage']) ?><br>
+                        <?= htmlspecialchars($review['titre']) ?>
+                        <?php if ($review['date_sortie'] !== null): ?>
+                            (<?= (int) substr($review['date_sortie'], 0, 4) ?>)
+                        <?php endif; ?>
+                    </p>
+
+                    <p class="reviewRating">
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <span class="<?= $i <= $review['note'] ? 'full' : 'empty' ?>" aria-hidden="true">🍿</span>
+                        <?php endfor; ?>
+                    </p>
+
+                    <?php if (!empty($review['commentaire'])): ?>
+                        <p class="reviewComment">
+                            <?= htmlspecialchars($review['commentaire']) ?>
+                        </p>
+                    <?php endif; ?>
 
 
                 </article>

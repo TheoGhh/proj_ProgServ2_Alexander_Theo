@@ -5,6 +5,7 @@
 	--color-background: #fff0d0;
 	--color-background-alt: #dccfb2;
 	--color-primary: #ffaa54;
+	--color-surface: #ffe2a3;
 	--color-text: #5a5a5a;
 	--color-text-light: #ffffff;
 
@@ -41,6 +42,7 @@ body > header {
 }
 
 #navigationSection .logo {
+	display: inline-block;
 	margin: 0;
 	padding: 0 1rem 0.25rem;
 	border-bottom: 2px solid var(--color-primary);
@@ -50,12 +52,31 @@ body > header {
 	color: var(--color-primary);
 }
 
+#navigationSection .logo span {
+	display: inline-block;
+	transition: transform 0.5s;
+}
+
+#navigationSection .logo:hover span {
+	transform: scale(1.2);
+}
+
 #navigationSection ul,
 .connectionSection ul {
 	display: flex;
 	margin: 0;
 	padding: 0;
 	list-style: none;
+}
+
+#navigationSection ul li,
+.connectionSection ul li {
+	transition: filter 0.4s;
+}
+
+#navigationSection ul li:hover,
+.connectionSection ul li:hover {
+	filter: brightness(0.9);
 }
 
 #navigationSection ul {
@@ -93,6 +114,246 @@ body > header {
 	font-weight: 800;
 	color: var(--color-text-light);
 	background-color: var(--color-primary);
+}
+
+/************************************************
+PAGE ACCUEIL
+************************************************/
+
+#introduction,
+#highestRatedPerformances,
+#lastReviews {
+	padding: 3rem max(16px, calc((100% - 1300px) / 2));
+}
+
+#introduction {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 3rem;
+}
+
+#introduction #hook {
+	font-family: var(--font-text);
+	font-size: 1.6rem;
+	font-weight: 850;
+	color: var(--color-primary);
+}
+
+#introduction h1 {
+	margin: 0 0 1.5rem;
+	font-size: clamp(2rem, 4.5vw, 3.4rem);
+	font-weight: 900;
+	line-height: 1.1;
+}
+
+#introduction p:not(#hook) {
+	margin: 0;
+	font-size: 1.5rem;
+	line-height: 1.4;
+	width: 40rem;
+}
+
+#introduction img {
+	flex-shrink: 0;
+	width: 200px;
+}
+
+#introduction form {
+	display: flex;
+	align-items: center;
+	gap: 2.5rem;
+	margin-top: 2rem;
+}
+
+#introduction label {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+#introduction #searchBar {
+	flex: 1;
+	min-width: 0;
+	padding: 0.8rem 1.4rem;
+	border: none;
+	border-radius: 999px;
+	font: inherit;
+	font-size: 1.2rem;
+	color: var(--color-text);
+	background-color: var(--color-surface);
+	box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.15);
+}
+
+#introduction #searchBar:focus {
+	outline: 3px solid var(--color-primary);
+	outline-offset: 2px;
+}
+
+#introduction button {
+	padding: 0.5rem 2.2rem;
+	border: none;
+	border-radius: 999px;
+	font: inherit;
+	font-size: 1.6rem;
+	color: var(--color-text-light);
+	background-color: var(--color-primary);
+	cursor: pointer;
+	transition: filter 0.4s;
+}
+
+#introduction button:hover {
+	filter: brightness(0.95);
+	transition: 0.4s;
+}
+
+/* --- Grilles de cartes --- */
+
+#highestRatedPerformances,
+#lastReviews {
+	display: grid;
+	gap: 2.25rem;
+}
+
+#highestRatedPerformances {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+#lastReviews {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+/* Le titre de chaque section occupe toute la ligne */
+#highestRatedPerformances h2,
+#lastReviews h2 {
+	grid-column: 1 / -1;
+	margin: 0;
+	font-size: 1.6rem;
+	font-weight: 800;
+}
+
+/* --- Carte d'une performance --- */
+
+.performanceCard {
+	overflow: hidden;
+	border-radius: 16px;
+	background-color: var(--color-surface);
+}
+
+.performanceCard a {
+	display: block;
+	height: 100%;
+	padding-bottom: 1rem;
+	color: inherit;
+	text-decoration: none;
+}
+
+.performanceCard img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 1;
+	object-fit: cover;
+	background-color: var(--color-background-alt);
+}
+
+.performanceCard a:hover img {
+	opacity: 0.85;
+}
+
+.performanceCard h3 {
+	margin: 0.75rem 1.1rem 0.25rem;
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.performanceCard p {
+	margin: 0 1.1rem;
+	font-size: 0.95rem;
+	font-weight: 600;
+}
+
+.performanceCard p:last-child {
+	margin-top: 0.75rem;
+}
+
+/* La note, en grand et en orange */
+.performanceCard p span {
+	margin-right: 0.35rem;
+	font-size: 1.6rem;
+	font-weight: 800;
+	color: var(--color-primary);
+}
+
+/* --- Dernières critiques --- */
+
+#lastReviews {
+	background-color: var(--color-background-alt);
+	box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reviewCard {
+	padding: 1.25rem;
+	border-radius: 16px;
+	background-color: var(--color-surface);
+}
+
+.reviewHeader {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 1rem;
+}
+
+/* Photo de profil, ou initiale dans un cercle orange */
+.avatar {
+	display: grid;
+	flex-shrink: 0;
+	place-items: center;
+	width: 3rem;
+	height: 3rem;
+	border-radius: 50%;
+	object-fit: cover;
+	font-size: 1.2rem;
+	font-weight: 800;
+	color: var(--color-text-light);
+	background-color: var(--color-primary);
+}
+
+.reviewAuthor {
+	margin: 0;
+	font-weight: 800;
+}
+
+.reviewHeader time {
+	font-size: 0.95rem;
+}
+
+.reviewRole {
+	margin: 0 0 0.5rem;
+}
+
+.reviewRole strong {
+	font-weight: 700;
+}
+
+/* Les pop-corns de la note : pleins pour la note, transparents pour le reste */
+.reviewRating {
+	margin: 0 0 0.75rem;
+	font-size: 1.4rem;
+	letter-spacing: 0.3rem;
+}
+
+.reviewRating .empty {
+	opacity: 0.25;
+}
+
+.reviewComment {
+	margin: 0;
+	font-size: 0.9rem;
+	line-height: 1.5;
 }
 
 /************************************************

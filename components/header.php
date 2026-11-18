@@ -1,6 +1,6 @@
 <header>
     <div id="navigationSection">
-        <a href="/public/index.php" class="logo">PopCorn</a>
+        <a href="/public/index.php" class="logo"><span>PopCorn</span></a>
         <nav>
             <ul>
                 <li><a href="/public/actorsCatalog.php">Acteurs</a></li>
